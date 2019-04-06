@@ -10,8 +10,8 @@ window.addEventListener('mousedown',function(event){
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
 
-canvas.width = 600;
-canvas.height = 400;
+canvas.width = 280;
+canvas.height = 280;
 canvas.style = "position:absolute; left: 50%; margin-left: -200px"; //canvas is in the center
 
 var mouse = {
@@ -26,17 +26,27 @@ window.addEventListener('mousemove',function(event){
     if(start == 1)
     {
     ctx.beginPath();
-    ctx.arc(mouse.x-480,mouse.y,5,0,Math.PI*2,false);
+    ctx.arc(mouse.x-480,mouse.y,15,0,Math.PI*2,false);//offset of 480 selected by trial and error
+    ctx.strokeStyle = '#A1C181';//'#233D4D';//'#A1C181';
+    ctx.fillStyle = '#A1C181';//'#233D4D';//'#A1C181';
     ctx.fill();
     ctx.stroke();
     }
 });
 
 function done(){
-    console.log('all done');
+    console.log('all done!!');
     var canvas = document.querySelector('canvas');
-    var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
-    window.location.href = img;
+    var imags = canvas.toDataURL("image/png");//.replace("image/png", "image/octet-stream"); //conversion is done to save the image
+    //imags=img.replace("image/png", "image/octet-stream");
+    console.log(imags);
+//To convert the image to png and save it
+    var link = document.createElement('a');
+    link.href=imags;
+    link.download='image.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
  //var image = new Image();
 /* drawing circle
